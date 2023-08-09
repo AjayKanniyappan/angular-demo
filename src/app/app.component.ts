@@ -11,6 +11,7 @@ import { DataService } from './data.service';
 })
 export class AppComponent {
   isButton = true;
+  isDatePickerOpen: boolean = false;
   dateList: string[] = [];
   addDate: any;
 
@@ -56,5 +57,13 @@ export class AppComponent {
     const selectedDate = new Date(d.getFullYear(), d.getMonth(), d.getDate());
     // Allow only today's date and future dates.
     return selectedDate >= today;
+  }
+
+  onDatePickerOpened() {
+    this.isDatePickerOpen = true;
+  }
+
+  onDatePickerClosed() {
+    this.isDatePickerOpen = false;
   }
 }

@@ -1,6 +1,32 @@
 <div class="center">
-  <mat-card>
-    <mat-card-content>
+  <mat-card class="pt-5">
+    <mat-card-content class="card">
+      <div>
+        <mat-form-field class="hidden">
+          <input
+            matInput
+            [matDatepickerFilter]="myFilter"
+            [matDatepicker]="picker"
+            (dateInput)="addEvent('input', $event)"
+          />
+          <mat-datepicker
+            #picker
+            (opened)="onDatePickerOpened()"
+            (closed)="onDatePickerClosed()"
+          ></mat-datepicker>
+        </mat-form-field>
+      </div>
+
+      <div class="pr-5 pt-5">
+        <button mat-icon-button class="calendar-button" (click)="picker.open()">
+          <mat-icon
+            class="calendar-icon"
+            [class.calendar-icon-active]="isDatePickerOpen"
+            >date_range</mat-icon
+          >
+        </button>
+      </div>
+
       <div class="text-center">
         <mat-form-field class="w-50">
           <mat-label>Date List</mat-label>
@@ -12,37 +38,17 @@
           </textarea>
         </mat-form-field>
       </div>
+
+      <div class="pl-5 pt-7">
+        <button
+          *ngIf="!isButton"
+          mat-raised-button
+          color="primary"
+          (click)="saveDate()"
+        >
+          Save
+        </button>
+      </div>
     </mat-card-content>
   </mat-card>
-
-  <div>
-    <mat-form-field class="hidden">
-      <input
-        matInput
-        [matDatepickerFilter]="myFilter"
-        [matDatepicker]="picker"
-        (dateInput)="addEvent('input', $event)"
-      />
-      <mat-datepicker #picker></mat-datepicker>
-    </mat-form-field>
-  </div>
-
-  <div>
-    <button
-      *ngIf="isButton"
-      mat-raised-button
-      color="primary"
-      (click)="picker.open()"
-    >
-      Add
-    </button>
-    <button
-      *ngIf="!isButton"
-      mat-raised-button
-      color="primary"
-      (click)="saveDate()"
-    >
-      Save
-    </button>
-  </div>
 </div>
